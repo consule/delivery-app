@@ -1,0 +1,49 @@
+<!-- <p> {{ pedidoModel.pedidos | json}}</p> -->
+<div class="well text-center">
+    <h2> <strong>P E D I D O S <br> E N T R E G U E S </strong> </h2>
+    <p class="text-danger"> <strong> Entregues: {{ pedidoModel.contador }} </strong></p>
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="email">Nome do Cliente:</label>
+        <div class="col-sm-9">
+            <input class="form-control" type="text" name="nomeCliente" id="nomeCliente" #nomeCliente>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="pwd"></label>
+        <div class="col-sm-3">
+            <button class="btn btn-success form-control" routerLink="">
+                Voltar
+            </button>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-info form-control" (click)="getPedidoNomeClienteEntregue(nomeCliente.value)">
+                Pesquisar
+            </button>
+        </div>
+        
+    </div>
+</form>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Data Hora Pedido</th>
+            <th class="text-center">Data Hora Entrega</th>
+            <th>Cliente</th>
+            <th>Produto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let val of pedidoModel.pedidos">
+            <td class="text-center"> {{ val.id }}</td>
+            <td class="text-center">{{ val.dataHoraPedido | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td class="text-center bg-danger">{{ val.dataHoraPedidoEntregue | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ val.nome }}</td>
+            <td>{{ val.descricao }}</td>
+            
+        </tr>
+    </tbody>
+</table>

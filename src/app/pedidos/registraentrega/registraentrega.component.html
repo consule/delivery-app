@@ -1,0 +1,36 @@
+<!-- <p> {{ pedidoModel.pedidos | json}}</p> -->
+<div class="well text-center">
+    <h2> <strong>R E G I S T R A <br>  E N T R E G A </strong> </h2>
+    <!-- <p class="text-danger"> <strong> Restantes: {{ pedidoModel.contador }} </strong></p> -->
+</div>
+<form class="form-horizontal">
+
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="email">Nome do Cliente:</label>
+        <div class="col-sm-9">
+            <input class="form-control" type="text" name="nomeCliente" id="nomeCliente" [(ngModel)]="pedidoModel[0].nome" #nomeCliente readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="email">Produto:</label>
+        <div class="col-sm-9">
+            <input class="form-control" type="text" name="produto" id="produto" [(ngModel)]="pedidoModel[0].descricao" #produto readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="pwd"></label>
+        <div class="col-sm-3">
+            <button class="btn btn-info form-control" routerLink="">
+                Voltar
+            </button>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-success form-control" (click)="registraEntrega(id)">
+                Entregar
+            </button>
+        </div>
+       
+    </div>
+</form>
