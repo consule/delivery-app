@@ -1,27 +1,55 @@
-# Portal
+# delivery
+ASP .NET 5, Angular 11, MySQL e Dapper. Sistema de controle de entregas para deposito de bebida, lanchonetes e outros. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+## Script para criação das tabelas do banco de dados
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+```
+CREATE TABLE DLV_CLIENTE (
+	ID INT NOT NULL AUTO_INCREMENT, 
+	NOME VARCHAR(200) NOT NULL, 
+	PRIMARY KEY(ID)
+);
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+CREATE TABLE DLV_PRODUTO (
+	ID INT NOT NULL AUTO_INCREMENT, 
+	DESCRICAO VARCHAR(200) NOT NULL, 
+	PRIMARY KEY(ID)
+);
 
-## Build
+CREATE TABLE DLV_PEDIDO (
+	ID INT NOT NULL AUTO_INCREMENT, 
+	DATAHORAPEDIDO TIMESTAMP DEFAULT NOW(),
+	DATAHORAPEDIDOENTREGUE TIMESTAMP,
+	IDCLIENTE INT NOT NULL , 
+	IDPRODUTO INT NOT NULL,
+	PRIMARY KEY(ID), 
+	FOREIGN KEY (IDCLIENTE) REFERENCES DLV_CLIENTE(ID), 
+	FOREIGN KEY (IDPRODUTO) REFERENCES DLV_PRODUTO(ID)
+);
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+INSERT INTO DLV_CLIENTE (NOME) VALUES ('CRISTIANO');
+INSERT INTO DLV_PRODUTO (DESCRICAO) VALUES ('FARDO DE CERVEJA');
+INSERT INTO DLV_PEDIDO (IDCLIENTE, IDPRODUTO) VALUES (1,1);
+```
+## Tela de Requisições (requests)
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![alt text](https://github.com/consule/delivery-api/blob/main/api/assets/swagger.png)
 
-## Running end-to-end tests
+## Tela de Pedidos 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+![alt text](https://github.com/consule/delivery-api/blob/main/api/assets/pedidos.png)
 
-## Further help
+## Tela para inserir novo pedido
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![alt text](https://github.com/consule/delivery-api/blob/main/api/assets/novo.png)
+
+## Tela para pesquisar pedidos entregues
+
+![alt text](https://github.com/consule/delivery-api/blob/main/api/assets/entregues.png)
+
+## Registra uma entrega de pedido
+
+![alt text](https://github.com/consule/delivery-api/blob/main/api/assets/registraentrega.png)
